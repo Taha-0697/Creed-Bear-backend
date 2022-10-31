@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { faker } = require('@faker-js/faker');
+const faker = require('Faker');
  
 exports.createRecords = ()=>{
 const first_name = faker.name.firstName();
