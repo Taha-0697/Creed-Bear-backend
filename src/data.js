@@ -59,17 +59,59 @@ exports.paginatedResults = (model)=> {
 exports.validations = (model)=>{
   return (req, res, next)=>{
     let {email, password} = req.body;
-    let users = model;
-    let userdetails = users.find(obj => obj.email == email && obj.password == password);
-    if(userdetails){
-         return res.send({
-                data: userdetails
-           })
-    }else{
-       return res.send({
-                message: "User Not Found"
-           })
+    let users = model.find(obj => obj.email == email && obj.password ==  password)
+    if(users){
+      return res.status(200).send({
+        data:{
+           status: "success",
+           user: users,
+        }
+      })
+    }
+    else {
+      return res.status(400).send({
+        data:{
+           status: "fail",
+           user: "invalid Credentials"
+        }
+      })
+    }
+   }
+}
+
+exports.test = ()=>{
+return (req, res, next)=>{
+    let {email, password} = req.body;
+    if(email == "admin123@gmail.com" && password == "admin123"){
+      return res.status(200).send({
+       data:{
+         status: "success",
+        user:{
+          id: uuidv4(),
+          firstname: email.slice(0,5),
+          lastname:email.slice(5,8),
+          email,
+          password,
+          avatar: faker.internet.avatar(),
+        }
+       }
+      })
+    }
+    else if(email != "admin123@gmail.com"){
+       return res.status(408).send({
+          message: "Email is Not Valid"
+       })
+    }
+    else if(password != "admin123"){
+       return res.status(408).send({
+          message: "Password is Not Valid"
+       })
+    }
+    else{
+      return res.status(400).send({
+          message: "User Not Found"
+       })
     }
     next();
-  }
+   }
 }

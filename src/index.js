@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 const express = require('express');
-const { createRecords, paginatedResults, validations } = require('./data');
+const { createRecords, paginatedResults, validations, test } = require('./data');
 const app = express();
 const PORT = process.env.NODE_APP_PORT || 8080;
 
@@ -162,6 +162,12 @@ app.delete(`/removeallusers`, (req,res)=>{
       //Login API 
 /* --------------- */
 
+//use getalluser api to get user email n password for Login
 app.post('/login',validations(users), (req, res)=>{
     res.json(res.validations)
+})
+
+//email = admin123@gmail  , password = admin123  use this data to login and get some dummy user data
+app.post('/logindummy',test(), (req, res)=>{
+    res.json(res.test)
 })
