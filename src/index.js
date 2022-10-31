@@ -1,8 +1,9 @@
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
 const express = require('express');
 const { createRecords, paginatedResults, validations } = require('./data');
 const app = express();
-const PORT = 8080;
+const PORT = process.env.NODE_APP_PORT || 8080;
 
 app.use(express.json());
 
