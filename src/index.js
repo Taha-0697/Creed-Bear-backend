@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const { createRecords, paginatedResults, validations, test } = require('./data');
 const app = express();
+
 const PORT = process.env.NODE_APP_PORT || 8080;
 
 app.use(express.json());
