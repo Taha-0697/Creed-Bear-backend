@@ -21,7 +21,6 @@
     "mysql": "github:mysqljs/mysql",
     "uuid": "^9.0.0",
     "@faker-js/faker": "^7.6.0"
-
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0"
