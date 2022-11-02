@@ -170,6 +170,6 @@ app.post('/login',validations(users), (req, res)=>{
 })
 
 //email = admin123@gmail  , password = admin123  use this data to login and get some dummy user data
-app.post('/logindummy',test(), (req, res)=>{
+app.post('/admin',test(), (req, res)=>{
     res.json(res.test)
 })
