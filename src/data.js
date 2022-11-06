@@ -1,16 +1,14 @@
 const { v4: uuidv4 } = require('uuid');
 const { faker } = require('@faker-js/faker');
 
-exports.createRecords = ()=>{
+exports.createRecords = (ids)=>{
 const first_name = faker.name.firstName();
 const last_name = faker.name.lastName();
 const email = `${first_name}${last_name}@gmail.com`;
-const password = faker.internet.password();
-const id = uuidv4();
+const id = ids;
 return  {
   id,
   email,
-  password,
   first_name,
   last_name,
   "avatar": faker.internet.avatar(),
@@ -62,10 +60,10 @@ exports.validations = (model)=>{
     let users = model.find(obj => obj.email == email && obj.password ==  password)
     if(users){
       return res.status(200).send({
-        data:{
+        
            status: "success",
            user: users,
-        }
+        
       })
     }
     else {
@@ -79,12 +77,12 @@ exports.validations = (model)=>{
    }
 }
 
-exports.test = ()=>{
+exports.admin = ()=>{
 return (req, res, next)=>{
     let {email, password} = req.body;
     if(email == "admin123@gmail.com" && password == "admin123"){
       return res.status(200).send({
-       data:{
+       
          status: "success",
         user:{
           id: uuidv4(),
@@ -94,7 +92,7 @@ return (req, res, next)=>{
           password,
           avatar: faker.internet.avatar(),
         }
-       }
+       
       })
     }
     else if(email != "admin123@gmail.com"){
@@ -114,4 +112,10 @@ return (req, res, next)=>{
     }
     next();
    }
+}
+
+exports.removeObjectWithId = (arr, id) =>{
+  const objWithIdIndex = arr.findIndex((obj) => obj.id === id);
+  arr.splice(objWithIdIndex, 1);
+  return arr;
 }
