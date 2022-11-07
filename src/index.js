@@ -25,6 +25,10 @@ for(let i=0; i < 10; i++){
         maindata.push(createRecords(i+1))
 }  
 
+app.get('/', (req, res)=>{
+    return res.status(200).send('server works');
+})
+
 //get all users
 app.get('/getallusers',async (req,res,next)=>{
     setTimeout(() => {
