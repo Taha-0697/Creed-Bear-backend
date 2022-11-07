@@ -21,7 +21,7 @@ app.listen(PORT, ()=>{
 /* --------------- */
 const maindata=[];
 
-for(let i=0; i < 10; i++){
+for(let i=0; i < 20; i++){
         maindata.push(createRecords(i+1))
 }  
 
